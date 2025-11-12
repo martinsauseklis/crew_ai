@@ -10,7 +10,7 @@ development_task:
   description: >
     Implement as meticulous development as you possibly can. Give the best shot as if your life depends on it.
   expected_output: >
-    Fully functional React app with Node.js backend
+    Fully functional React app with Node.js backend, files saved.
   agent: sen_developer
-  context: planning_task
-  output_file: proj_dev.zip
+  context:
+    - planning_task
