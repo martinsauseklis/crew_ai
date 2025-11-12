@@ -1,17 +1,16 @@
-research_task:
+planning_task:
   description: >
-    Conduct a thorough research about {topic}
-    Make sure you find any interesting and relevant information given
-    the current year is {current_year}.
+    Conduct a thorough planning of the {project}. You take into consideration all the critical aspects of web development, like security. No attacker can exploit you.
   expected_output: >
-    A list with 10 bullet points of the most relevant information about {topic}
-  agent: researcher
+    Plan of the web development. Split it into main parts and subtasks that need to be done to create contemporary web app. Turn the plan into a prompt for senior web developer who is going 
+    to do the development according to the plan.
+  agent: sen_developer
 
-reporting_task:
+development_task:
   description: >
-    Review the context you got and expand each topic into a full section for a report.
-    Make sure the report is detailed and contains any and all relevant information.
+    Implement as meticulous development as you possibly can. Give the best shot as if your life depends on it.
   expected_output: >
-    A fully fledged report with the main topics, each with a full section of information.
-    Formatted as markdown without '```'
-  agent: reporting_analyst
+    Fully functional React app with Node.js backend
+  agent: sen_developer
+  context: planning_task
+  output_file: proj_dev.zip
