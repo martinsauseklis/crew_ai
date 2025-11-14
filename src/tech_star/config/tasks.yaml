@@ -1,16 +1,417 @@
-planning_task:
-  description: >
-    Conduct a thorough planning of the {project}. You take into consideration all the critical aspects of web development, like security. No attacker can exploit you.
-  expected_output: >
-    Plan of the web development. Split it into main parts and subtasks that need to be done to create contemporary web app. Turn the plan into a prompt for senior web developer who is going 
-    to do the development according to the plan.
-  agent: sen_developer
+# src/config/tasks.yaml
+# Master task configuration for your “Become Expert AI Engineer” crew
 
-development_task:
+###############################################################################
+# PHASE 1 — META-LEARNING & STRATEGY
+###############################################################################
+
+design_personalized_learning_strategy:
   description: >
-    Implement as meticulous development as you possibly can. Give the best shot as if your life depends on it.
+    Design a deeply personalized, project-based learning strategy that takes the user from their current level
+    to expert-level AI engineer. Incorporate phases, milestones, feedback loops and realistic time constraints. Constraints that must be taken
+    into account is that the user can spend {time_per_day} on learning daily and each week he can do it {days_per_week} days per week.
   expected_output: >
-    Fully functional React app with Node.js backend, files saved.
-  agent: sen_developer
+    A structured "Expert AI Engineer Learning Blueprint" containing:
+      - Phases (Foundation → Core ML → Deep Learning → Systems & MLOps → Domain Specialization → Innovation & Leadership)
+      - For each phase: goals, modules, projects, estimated duration
+      - Weekly schedule template with learning, building and reflection blocks
+      - Checkpoints for measuring progress and adjusting the plan
+  agent: learning_experience_designer
+
+meta_learning_analysis:
+  description: >
+    Analyze how the user learns best and identify cognitive bottlenecks and strengths based on the learning blueprint.
+  expected_output: >
+    A meta-learning profile report including:
+      - Preferred learning modalities and optimal study times
+      - Cognitive load risks and mitigation strategies
+      - Recommended use of spaced repetition, interleaving and deliberate practice
+      - Suggested reflection cadence and review rituals
+  agent: educational_psychologist
   context:
-    - planning_task
+    - design_personalized_learning_strategy
+
+learning_habit_coaching:
+  description: >
+    Turn the learning strategy and meta-learning analysis into a concrete daily and weekly habit system
+    the user can realistically follow.
+  expected_output: >
+    A habit system including:
+      - Daily and weekly schedules with deep work blocks
+      - Concrete rules for breaks, context switching, and task batching
+      - A simple habit tracking template
+      - A recovery plan for when routines are broken
+  agent: meta_learning_coach
+  context:
+    - design_personalized_learning_strategy
+    - meta_learning_analysis
+
+###############################################################################
+# PHASE 2 — TECHNICAL AI/ML MASTERY
+###############################################################################
+
+ai_curriculum_development:
+  description: >
+    Design a rigorous AI/ML curriculum aligned with the user’s learning blueprint and meta-learning profile.
+  expected_output: >
+    A curriculum document including:
+      - Topic sequence (math, ML basics, DL architectures, MLOps, domain topics)
+      - For each topic: learning objectives, key resources, practice ideas
+      - “Must read” paper list with short annotations
+      - Suggested pacing and difficulty ramp
+  agent: ai_educator
+  context:
+    - design_personalized_learning_strategy
+    - meta_learning_analysis
+
+project_portfolio_design:
+  description: >
+    Define a sequence of portfolio projects that apply the curriculum to realistic AI engineering problems.
+  expected_output: >
+    A portfolio roadmap with at least 5 major projects including:
+      - Project titles and problem descriptions
+      - Expected stack (frameworks, tools, infra)
+      - Success criteria and evaluation metrics
+      - Ideas for extensions and “wow factors”
+  agent: senior_ai_engineer
+  context:
+    - ai_curriculum_development
+
+mlops_system_setup:
+  description: >
+    Design an end-to-end MLOps setup so that the user’s projects can be trained, versioned, deployed and monitored
+    like real-world systems.
+  expected_output: >
+    An MLOps architecture and checklist including:
+      - Choice of experiment tracking and model registry tools
+      - CI/CD pipeline outline for training and deployment
+      - Data & model versioning guidelines
+      - Monitoring and alerting strategy
+  agent: mlops_engineer
+  context:
+    - project_portfolio_design
+
+ai_research_alignment:
+  description: >
+    Align the user’s curriculum and project portfolio with current and emerging AI research trends.
+  expected_output: >
+    A research alignment report including:
+      - 10–15 key recent papers mapped to curriculum phases or projects
+      - Suggested replication/extension ideas per paper
+      - Notes on which areas might become especially valuable in 2–3 years
+  agent: research_scientist
+  context:
+    - project_portfolio_design
+
+###############################################################################
+# PHASE 3 — CAREER & POSITIONING
+###############################################################################
+
+career_readiness_plan:
+  description: >
+    Translate the curriculum and project roadmap into a concrete career plan: target roles, timelines,
+    skill gaps and networking strategies.
+  expected_output: >
+    A career readiness plan including:
+      - Target job titles and example job descriptions
+      - Required skills mapped to phases and projects
+      - Skill gap list with remediation suggestions
+      - Timeline and checkpoints for starting applications
+  agent: career_coach
+  context:
+    - ai_curriculum_development
+    - project_portfolio_design
+
+job_market_scan:
+  description: >
+    Analyze the current AI/ML job market in light of the career readiness plan and extract concrete, up-to-date requirements.
+  expected_output: >
+    A job market scan including:
+      - 10–20 recent job postings matching target roles
+      - Common skill, tool and experience requirements
+      - Keyword list for CV and LinkedIn optimization
+      - Observations about geography/remote options and salary bands
+  agent: technical_recruiter
+  context:
+    - career_readiness_plan
+
+mock_interview_program:
+  description: >
+    Design a structured mock interview program that follows the user’s project and learning progress.
+  expected_output: >
+    A 12-week mock interview plan including:
+      - Weekly focus (coding, ML theory, system design, behavioral)
+      - Example questions and scenarios
+      - Evaluation rubrics and feedback templates
+      - Suggestions for incorporating lessons learned into future practice
+  agent: mock_interview_coach
+  context:
+    - career_readiness_plan
+    - project_portfolio_design
+
+personal_brand_strategy:
+  description: >
+    Build a personal branding and “learning in public” strategy aligned with the user’s roadmap and portfolio.
+  expected_output: >
+    A brand strategy document including:
+      - Positioning statement (“who I am, what I do, where I’m going”)
+      - Content plan (blog posts, threads, project write-ups, talks)
+      - Cadence and channels (LinkedIn, X, GitHub, etc.)
+      - Simple metrics to track (followers, profile visits, repo stars)
+  agent: branding_mentor
+  context:
+    - career_readiness_plan
+    - project_portfolio_design
+
+###############################################################################
+# PHASE 4 — LEARNING PLATFORM BUILD
+###############################################################################
+
+platform_product_spec:
+  description: >
+    Consolidate all prior outputs into a coherent product specification for the personalized AI learning platform.
+  expected_output: >
+    A Product Requirements Document (PRD) including:
+      - Problem statement and success metrics
+      - User personas and main user journeys
+      - Feature list with priorities (dashboard, modules, AI tutor, recs, analytics, gamification)
+      - Non-functional requirements (performance, security, reliability)
+  agent: product_manager
+  context:
+    - design_personalized_learning_strategy
+    - ai_curriculum_development
+    - project_portfolio_design
+    - career_readiness_plan
+
+multi_agent_architecture_blueprint:
+  description: >
+    Design the multi-agent architecture: how all agents, services and data flows interact to support the platform.
+  expected_output: >
+    An architecture blueprint including:
+      - List of agents and their responsibilities
+      - Interaction patterns and data flows between agents and services
+      - High-level diagrams (components and sequence flows)
+      - Notes on extensibility and future agents/services
+  agent: ai_platform_architect
+  context:
+    - platform_product_spec
+    - ai_curriculum_development
+    - project_portfolio_design
+
+technical_system_design:
+  description: >
+    Turn the product spec and architecture blueprint into a concrete technical system design
+    covering tech stack, boundaries and implementation phases. Keep in mind to use web stack as the solution needs to be runnable locally on browser.
+  expected_output: >
+    A technical design document including:
+      - Chosen tech stack (frontend, backend, data, infra)
+      - Service boundaries and API contracts
+      - Data model overview
+      - Implementation phases and responsibilities
+      - Instruct actual developers to store project in output folder with documentation on how to run it.
+  agent: full_stack_lead
+  context:
+    - platform_product_spec
+    - multi_agent_architecture_blueprint
+
+ui_ux_design:
+  description: >
+    Design the core UX and UI for the platform: dashboard, module view, AI tutor interface, analytics and gamification surfaces.
+  expected_output: >
+    A UX/UI package including:
+      - User flows for main journeys (start session, continue module, ask tutor, review progress)
+      - Wireframes or high-fidelity mockups for key screens
+      - Basic design system (typography, colors, components)
+  agent: ui_ux_designer
+  context:
+    - platform_product_spec
+
+gamification_system_design:
+  description: >
+    Design a gamification system that supports motivation and habit formation without creating distraction.
+  expected_output: >
+    A gamification design including:
+      - XP, levels, badges or streak mechanics
+      - Rules for rewards and challenge unlocks
+      - Integration points in the UI and analytics (what events give XP, etc.)
+      - Guardrails to avoid unhealthy engagement patterns
+  agent: gamification_designer
+  context:
+    - platform_product_spec
+    - design_personalized_learning_strategy
+    - ui_ux_design
+
+frontend_development:
+  description: >
+    Implement the frontend of the platform according to the UX/UI and gamification designs, integrating with backend APIs.
+  expected_output: >
+    A running frontend application that:
+      - Implements key screens and flows
+      - Integrates with authentication, modules, progress and AI tutor endpoints
+      - Displays XP/levels/badges consistently
+  agent: frontend_engineer
+  context:
+    - ui_ux_design
+    - gamification_system_design
+    - technical_system_design
+
+backend_infrastructure:
+  description: >
+    Implement backend services and APIs for users, modules, progress tracking, recommendations and AI tutor integration.
+  expected_output: >
+    Backend services including:
+      - Auth and user profile endpoints
+      - Module and content management
+      - Progress tracking and event logging
+      - Recommendation & tutor integration endpoints
+  agent: backend_engineer
+  context:
+    - platform_product_spec
+    - ui_ux_design
+    - technical_system_design
+
+data_pipeline_build:
+  description: >
+    Build the data pipelines to capture and transform learning interaction data for analytics and personalization.
+  expected_output: >
+    A working data pipeline including:
+      - Event schema and logging conventions
+      - ETL/ELT jobs into a warehouse or analytics store
+      - Basic data quality checks
+  agent: data_engineer
+  context:
+    - backend_infrastructure
+
+ai_recommendation_system:
+  description: >
+    Implement the adaptive recommendation engine that suggests next modules, exercises or projects based on user data.
+  expected_output: >
+    A recommendation service that:
+      - Consumes learner history and performance data
+      - Produces ranked suggestions with rationale
+      - Exposes an API used by the backend and frontend
+  agent: ai_recommendation_engineer
+  context:
+    - data_pipeline_build
+    - gamification_system_design
+
+progress_analytics_dashboard:
+  description: >
+    Create dashboards that visualize user progress, effort and outcomes in a motivating and understandable way.
+  expected_output: >
+    Dashboard specs and/or implementation including:
+      - Key metrics (time on task, completion, difficulty trends)
+      - Visuals (timelines, knowledge areas, streaks)
+      - Views for the user and optionally for mentors
+  agent: data_visualization_specialist
+  context:
+    - data_pipeline_build
+    - design_personalized_learning_strategy
+
+qa_and_testing:
+  description: >
+    Test the platform end-to-end across critical user journeys and integrations.
+  expected_output: >
+    A QA report including:
+      - Test plan and coverage overview
+      - List of found issues categorized by severity
+      - Regression tests for core flows
+  agent: qa_engineer
+  context:
+    - frontend_development
+    - backend_infrastructure
+
+deployment_and_monitoring:
+  description: >
+    Deploy the platform and set up monitoring, logging and alerting.
+  expected_output: >
+    An operational setup including:
+      - CI/CD pipelines for frontend, backend and recommender
+      - Monitoring dashboards and alerts for availability and errors
+      - Basic cost and performance tracking
+  agent: devops_engineer
+  context:
+    - qa_and_testing
+
+security_and_privacy_audit:
+  description: >
+    Audit security and privacy aspects of the platform and implement improvements where needed.
+  expected_output: >
+    A security report and remediation checklist including:
+      - Authentication, authorization and session management review
+      - Data protection and encryption practices
+      - Recommendations and implemented fixes
+  agent: security_engineer
+  context:
+    - deployment_and_monitoring
+
+system_documentation:
+  description: >
+    Document the architecture, components and workflows of the learning platform and multi-agent system.
+  expected_output: >
+    Documentation set including:
+      - High-level architecture overview
+      - Service-by-service descriptions
+      - How-to guides for extending the system or adding new agents/tasks
+  agent: technical_writer
+  context:
+    - platform_product_spec
+    - multi_agent_architecture_blueprint
+    - deployment_and_monitoring
+
+###############################################################################
+# PHASE 5 — LONG-TERM GROWTH, COMMUNITY & FUTURE-PROOFING
+###############################################################################
+
+ai_trend_forecasting:
+  description: >
+    Analyze AI research and industry trends and suggest how the user’s roadmap and platform should evolve.
+  expected_output: >
+    A trend & strategy report including:
+      - Key research and product trends over the next 2–3 years
+      - Suggested updates to curriculum, projects and platform features
+      - Ideas for new specializations the user might pursue
+  agent: ai_strategist
+  context:
+    - ai_curriculum_development
+    - platform_product_spec
+
+open_source_contribution_plan:
+  description: >
+    Design a plan for the user to contribute to open-source AI/ML projects that align with their skills and goals.
+  expected_output: >
+    An open-source roadmap including:
+      - 3–5 target repositories and why they’re relevant
+      - First-contribution ideas (issues/docs/tests/features)
+      - Suggested cadence and contribution progression over 6–12 months
+  agent: open_source_mentor
+  context:
+    - project_portfolio_design
+
+community_and_network_expansion:
+  description: >
+    Plan how the user will engage with AI communities, events and collaborations to build network and reputation.
+  expected_output: >
+    A 6–12 month community engagement plan including:
+      - Target communities (online + local) and proposed roles
+      - Events, meetups, hackathons or conferences to attend or speak at
+      - Collaboration ideas (study groups, joint projects, paper clubs)
+  agent: community_leader
+  context:
+    - personal_brand_strategy
+    - career_readiness_plan
+    - open_source_contribution_plan
+
+high_value_networking_strategy:
+  description: >
+    Design a networking strategy that focuses on high-value relationships aligned with the user’s target roles and interests.
+  expected_output: >
+    A networking playbook including:
+      - Ideal contact profiles (roles, companies, communities)
+      - Outreach message templates and follow-up sequences
+      - Monthly relationship-building goals and tracking template
+  agent: networking_specialist
+  context:
+    - career_readiness_plan
+    - job_market_scan
+    - community_and_network_expansion

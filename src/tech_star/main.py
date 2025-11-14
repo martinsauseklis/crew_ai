@@ -13,7 +13,9 @@ warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 # Replace with inputs you want to test with, it will automatically
 # interpolate any tasks and agents information
 inputs = {
-        "project": "Ultralearning platform"
+        "project": "Ultralearning platform",
+        "time_per_day": "3.5 hours",
+        "days_per_week": "5"
     }
 
 def run():
